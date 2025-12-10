@@ -1,3 +1,10 @@
+
+Antigravityを使う前に: Next.js用に人間には厳しいルールを適用したサンプル #Gemini - Qiita
+
+https://qiita.com/masakinihirota/items/dbbd8f897114a422d83a
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
