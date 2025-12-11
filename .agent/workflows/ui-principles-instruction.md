@@ -48,15 +48,16 @@ Output: Before/After比較レポート、Lighthouseスコア改善証明
 
 **対象**: 新規実装、既存改修、全コードレビュー
 
-| # | 指針 | 検証方法 | 理由 | 違反例 |
-|---|------|----------|------|--------|
-| **HID-1** | **シンプルにする** | 画面要素数≤9個 | 認知負荷軽減 | 1画面に10個以上のボタン |
-| **HID-6** | **一貫性** | プライマリ=`variant="default"`<br>破壊的=`variant="destructive"` | 学習コスト削減 | 削除ボタンが`variant="default"` |
-| **HID-11** | **コンストレイント** | 全フォームにバリデーション | エラー防止 | `required`なし |
-| **HID-16** | **フィッツの法則** | プライマリボタン最小44×44px | タップ成功率向上 | 小さすぎるボタン |
-| **HID-13** | **記憶に頼らない** | ヘルプテキスト必須 | 完了率向上 | 説明なしのフォーム |
+| #          | 指針                 | 検証方法                                                         | 理由             | 違反例                          |
+| ---------- | -------------------- | ---------------------------------------------------------------- | ---------------- | ------------------------------- |
+| **HID-1**  | **シンプルにする**   | 画面要素数≤9個                                                   | 認知負荷軽減     | 1画面に10個以上のボタン         |
+| **HID-6**  | **一貫性**           | プライマリ=`variant="default"`<br>破壊的=`variant="destructive"` | 学習コスト削減   | 削除ボタンが`variant="default"` |
+| **HID-11** | **コンストレイント** | 全フォームにバリデーション                                       | エラー防止       | `required`なし                  |
+| **HID-16** | **フィッツの法則**   | プライマリボタン最小44×44px                                      | タップ成功率向上 | 小さすぎるボタン                |
+| **HID-13** | **記憶に頼らない**   | ヘルプテキスト必須                                               | 完了率向上       | 説明なしのフォーム              |
 
 **自動検証コマンド**:
+
 ```bash
 # Tier 1チェックスクリプト
 grep -rn 'variant="default"' src/app/ | wc -l  # 一貫性
@@ -70,18 +71,18 @@ npm run lighthouse -- --only-categories=accessibility,performance
 
 **対象**: コア機能、課金フロー、オンボーディング、ダッシュボード
 
-| # | 指針 | 適用シーン | 実装例 |
-|---|------|-----------|--------|
-| HID-2 | 簡単にする | タスク完了≤3クリック | ワンクリック作成ボタン |
-| HID-3 | メンタルモデル | 馴染みのあるパターン | タブ、ハンバーガーメニュー |
-| HID-4 | シグニファイア | クリック可能要素を明確に | `<Button>`コンポーネント必須 |
-| HID-5 | マッピング | 編集ボタンは対象の近く | カード内にアクションボタン |
-| HID-7 | ユーザー主導権 | 自動リダイレクト回避 | モーダルのEscキー対応 |
-| HID-10 | 視覚ゲシュタルト | グループ化（gap-2 vs gap-6） | Cardでセクション分離 |
-| HID-12 | ユーザーの言葉 | 技術用語回避 | "Submit"→"送信する" |
-| HID-14 | プリコンピュテーション | スマートデフォルト | `defaultValue="public"` |
-| HID-17 | ヒックの法則 | 選択肢5〜7個 | サブメニュー化 |
-| HID-20 | メジャータスク最適化 | 主要機能を前面に | ダッシュボード配置 |
+| #      | 指針                   | 適用シーン                   | 実装例                       |
+| ------ | ---------------------- | ---------------------------- | ---------------------------- |
+| HID-2  | 簡単にする             | タスク完了≤3クリック         | ワンクリック作成ボタン       |
+| HID-3  | メンタルモデル         | 馴染みのあるパターン         | タブ、ハンバーガーメニュー   |
+| HID-4  | シグニファイア         | クリック可能要素を明確に     | `<Button>`コンポーネント必須 |
+| HID-5  | マッピング             | 編集ボタンは対象の近く       | カード内にアクションボタン   |
+| HID-7  | ユーザー主導権         | 自動リダイレクト回避         | モーダルのEscキー対応        |
+| HID-10 | 視覚ゲシュタルト       | グループ化（gap-2 vs gap-6） | Cardでセクション分離         |
+| HID-12 | ユーザーの言葉         | 技術用語回避                 | "Submit"→"送信する"          |
+| HID-14 | プリコンピュテーション | スマートデフォルト           | `defaultValue="public"`      |
+| HID-17 | ヒックの法則           | 選択肢5〜7個                 | サブメニュー化               |
+| HID-20 | メジャータスク最適化   | 主要機能を前面に             | ダッシュボード配置           |
 
 ---
 
@@ -117,6 +118,7 @@ DADSのスタイル要件を満たした上で、本書の指針で情報設計�
 **適用原則**: HID-1シンプル、HID-13記憶に頼らない、HID-14プリコンピュテーション
 
 **実装例**:
+
 ```tsx
 // ✅ Tier 1準拠: 1画面1質問、ヘルプテキスト、スマートデフォルト
 export default function OnboardingStep1() {
@@ -128,20 +130,19 @@ export default function OnboardingStep1() {
       </CardHeader>
       <CardContent>
         <div className="space-y-2">
-          <Label htmlFor="displayName">表示名<span className="text-red-600">*</span></Label>
-          <Input
-            id="displayName"
-            required
-            placeholder="例: 田中太郎"
-            maxLength={50}
-          />
+          <Label htmlFor="displayName">
+            表示名<span className="text-red-600">*</span>
+          </Label>
+          <Input id="displayName" required placeholder="例: 田中太郎" maxLength={50} />
           <p className="text-sm text-muted-foreground">
             他のユーザーに表示される名前です。後から変更できます。
           </p>
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" disabled aria-disabled="true">戻る</Button>
+        <Button variant="outline" disabled aria-disabled="true">
+          戻る
+        </Button>
         <Button type="submit">次へ</Button>
       </CardFooter>
     </Card>
@@ -150,6 +151,7 @@ export default function OnboardingStep1() {
 ```
 
 **チェックリスト**:
+
 - [x] HID-1: 画面要素数≤9個（タイトル、説明、ラベル、入力、ヘルプ、ボタン×2 = 7個）
 - [x] HID-6: 一貫性（次へ=`variant="default"`、戻る=`variant="outline"`）
 - [x] HID-11: コンストレイント（`required`、`maxLength`）
@@ -162,35 +164,36 @@ export default function OnboardingStep1() {
 **適用原則**: HID-1シンプル、HID-6一貫性、HID-14プリコンピュテーション
 
 **実装例**:
+
 ```tsx
 // ✅ Tier 1準拠: 3プラン表示、推奨プランをデフォルト選択
 export default function PricingPage() {
-  const [selectedPlan, setSelectedPlan] = useState<'basic' | 'standard' | 'premium'>('standard');
+  const [selectedPlan, setSelectedPlan] = useState<"basic" | "standard" | "premium">("standard");
 
   return (
     <div className="grid gap-6 md:grid-cols-3">
       <PricingCard
         plan="premium"
         price="¥2,980/月"
-        features={['全機能', '優先サポート', 'API無制限']}
+        features={["全機能", "優先サポート", "API無制限"]}
         badge="人気"
-        isSelected={selectedPlan === 'premium'}
-        onClick={() => setSelectedPlan('premium')}
+        isSelected={selectedPlan === "premium"}
+        onClick={() => setSelectedPlan("premium")}
       />
       <PricingCard
         plan="standard"
         price="¥1,480/月"
-        features={['基本機能', '標準サポート', 'API 10,000回/月']}
+        features={["基本機能", "標準サポート", "API 10,000回/月"]}
         badge="推奨"
-        isSelected={selectedPlan === 'standard'}
-        onClick={() => setSelectedPlan('standard')}
+        isSelected={selectedPlan === "standard"}
+        onClick={() => setSelectedPlan("standard")}
       />
       <PricingCard
         plan="basic"
         price="¥480/月"
-        features={['限定機能', 'コミュニティサポート', 'API 1,000回/月']}
-        isSelected={selectedPlan === 'basic'}
-        onClick={() => setSelectedPlan('basic')}
+        features={["限定機能", "コミュニティサポート", "API 1,000回/月"]}
+        isSelected={selectedPlan === "basic"}
+        onClick={() => setSelectedPlan("basic")}
       />
     </div>
   );
@@ -198,6 +201,7 @@ export default function PricingPage() {
 ```
 
 **チェックリスト**:
+
 - [x] HID-1: シンプル（3プランのみ）
 - [x] HID-6: 一貫性（全カード同じレイアウト）
 - [x] HID-14: プリコンピュテーション（standardをデフォルト選択）
@@ -210,30 +214,23 @@ export default function PricingPage() {
 **適用原則**: HID-1シンプル、HID-11コンストレイント、HID-13記憶に頼らない
 
 **実装例**:
+
 ```tsx
 // ✅ Tier 1準拠: 必須項目のみ、バリデーション、ヘルプテキスト
 export default function CreateCommunityForm() {
   return (
     <form className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="name">コミュニティ名<span className="text-red-600">*</span></Label>
-        <Input
-          id="name"
-          required
-          minLength={3}
-          maxLength={50}
-          placeholder="例: Next.js勉強会"
-        />
+        <Label htmlFor="name">
+          コミュニティ名<span className="text-red-600">*</span>
+        </Label>
+        <Input id="name" required minLength={3} maxLength={50} placeholder="例: Next.js勉強会" />
         <p className="text-sm text-muted-foreground">3〜50文字で入力してください</p>
       </div>
 
       <div className="space-y-2">
         <Label htmlFor="description">説明（任意）</Label>
-        <Textarea
-          id="description"
-          placeholder="コミュニティの目的や活動内容"
-          maxLength={500}
-        />
+        <Textarea id="description" placeholder="コミュニティの目的や活動内容" maxLength={500} />
         <p className="text-sm text-muted-foreground">最大500文字</p>
       </div>
 
@@ -253,7 +250,9 @@ export default function CreateCommunityForm() {
       </div>
 
       <div className="flex justify-end gap-2">
-        <Button type="button" variant="outline">キャンセル</Button>
+        <Button type="button" variant="outline">
+          キャンセル
+        </Button>
         <Button type="submit">作成</Button>
       </div>
     </form>
@@ -262,6 +261,7 @@ export default function CreateCommunityForm() {
 ```
 
 **チェックリスト**:
+
 - [x] HID-1: シンプル（必須項目は名前のみ）
 - [x] HID-6: 一貫性（作成=`variant="default"`、キャンセル=`variant="outline"`）
 - [x] HID-11: コンストレイント（`required`, `minLength`, `maxLength`）
@@ -275,6 +275,7 @@ export default function CreateCommunityForm() {
 **適用原則**: HID-6一貫性、HID-11コンストレイント
 
 **実装例**:
+
 ```tsx
 // ✅ Tier 1準拠: 破壊的アクションは必ず確認ダイアログ
 <AlertDialog>
@@ -305,6 +306,7 @@ export default function CreateCommunityForm() {
 ```
 
 **チェックリスト**:
+
 - [x] HID-6: 一貫性（削除=`variant="destructive"`固定）
 - [x] HID-11: コンストレイント（確認ダイアログ必須）
 - [x] HID-12: ユーザーの言葉（"Delete"ではなく"削除"）
@@ -357,7 +359,7 @@ export function checkHIDTier1Compliance(story: any) {
   const violations: string[] = [];
 
   // HID-1: シンプルさ（要素数チェック）
-  const elementCount = story.querySelectorAll('button, input, select').length;
+  const elementCount = story.querySelectorAll("button, input, select").length;
   if (elementCount > 9) {
     violations.push(`HID-1違反: 画面要素数${elementCount}個（9個以下推奨）`);
   }
@@ -365,7 +367,7 @@ export function checkHIDTier1Compliance(story: any) {
   // HID-6: 一貫性（破壊的アクションチェック）
   const deleteButtons = story.querySelectorAll('button:contains("削除")');
   deleteButtons.forEach((btn: HTMLButtonElement) => {
-    if (!btn.className.includes('destructive')) {
+    if (!btn.className.includes("destructive")) {
       violations.push('HID-6違反: 削除ボタンが variant="destructive" ではない');
     }
   });

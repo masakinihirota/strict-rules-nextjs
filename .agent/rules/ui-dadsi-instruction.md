@@ -28,13 +28,13 @@ Output: TSXコンポーネント（型安全、テスト可能）
 
 ## 技術スタック
 
-| 項目 | 仕様 | 検証方法 |
-|------|------|----------|
-| **デザインシステム** | DADS v2.9.0 | 公式サイト: https://design.digital.go.jp/ |
-| **CSS** | Tailwind CSS v4標準クラスのみ | `className`内にカスタム変数がないこと |
-| **アクセシビリティ** | WCAG 2.1 AAレベル | axe DevToolsでエラー0件 |
-| **デバイス** | デスクトップ優先 | lg:ブレイクポイント(1024px)基準 |
-| **ライセンス** | MIT License | © 2025 デジタル庁 |
+| 項目                 | 仕様                          | 検証方法                                  |
+| -------------------- | ----------------------------- | ----------------------------------------- |
+| **デザインシステム** | DADS v2.9.0                   | 公式サイト: https://design.digital.go.jp/ |
+| **CSS**              | Tailwind CSS v4標準クラスのみ | `className`内にカスタム変数がないこと     |
+| **アクセシビリティ** | WCAG 2.1 AAレベル             | axe DevToolsでエラー0件                   |
+| **デバイス**         | デスクトップ優先              | lg:ブレイクポイント(1024px)基準           |
+| **ライセンス**       | MIT License                   | © 2025 デジタル庁                         |
 
 ## デザイン原則
 
@@ -81,16 +81,16 @@ Output: TSXコンポーネント（型安全、テスト可能）
   - ⚠️ 注意: 複合キー（``key={`${profile.name}-${index}`}``）はユニークIDがない場合のみ
   - ❌ Bad: インデッデスクトップ基準）
 
-| 用途 | Tailwindクラス | サイズ | 検証 |
-|------|----------------|--------|------|
-| **H1** | `text-4xl font-bold leading-tight` | 36px | 見出し階層が正しいか |
-| **H2** | `text-3xl font-bold leading-tight` | 30px | 〃 |
-| **H3** | `text-2xl font-bold leading-snug` | 24px | 〃 |
-| **本文** | `text-base leading-relaxed` | 16px | 行間1.625 (relaxed) |
-| **強調** | `text-base font-semibold` | 16px | 太字で視認性確保 |
-| **補助** | `text-sm leading-normal` | 14px | コントラスト比確認 |
+| 用途     | Tailwindクラス                     | サイズ | 検証                 |
+| -------- | ---------------------------------- | ------ | -------------------- |
+| **H1**   | `text-4xl font-bold leading-tight` | 36px   | 見出し階層が正しいか |
+| **H2**   | `text-3xl font-bold leading-tight` | 30px   | 〃                   |
+| **H3**   | `text-2xl font-bold leading-snug`  | 24px   | 〃                   |
+| **本文** | `text-base leading-relaxed`        | 16px   | 行間1.625 (relaxed)  |
+| **強調** | `text-base font-semibold`          | 16px   | 太字で視認性確保     |
+| **補助** | `text-sm leading-normal`           | 14px   | コントラスト比確認   |
 
-**制約**: `font-sans`（Noto Sans JP）固定、カスタムフォント禁止           | 12px, normal, 行間normal   |
+**制約**: `font-sans`（Noto Sans JP）固定、カスタムフォント禁止 | 12px, normal, 行間normal |
 
 **フォントファミリー**: デフォルトで `font-sans`（Noto Sans JP）
 
@@ -98,16 +98,17 @@ Output: TSXコンポーネント（型安全、テスト可能）
 
 #### VNS sトークン（検証必須）
 
-| 用途 | クラス | コントラスト比 | 検証ツール |
-|------|--------|----------------|------------|
-| **Primary** | `bg-blue-600 text-white` | 4.5:1以上 | Chrome DevTools Contrast |
-| **Secondary** | `bg-white text-blue-600 border-blue-600` | 4.5:1以上 | 〃 |
-| **Focus** | `ring-yellow-400` (統一) | — | Tab操作で視認可能か |
-| **Success** | `bg-green-50 text-green-700` | 4.5:1以上 | 〃 |
-| **Error** | `bg-red-50 text-red-700 border-red-200` | 4.5:1以上 | 〃 |
-| **Disabled** | `bg-gray-100 text-gray-400` + `aria-disabled="true"` | — | `disabled`属性が無いこと |
+| 用途          | クラス                                               | コントラスト比 | 検証ツール               |
+| ------------- | ---------------------------------------------------- | -------------- | ------------------------ |
+| **Primary**   | `bg-blue-600 text-white`                             | 4.5:1以上      | Chrome DevTools Contrast |
+| **Secondary** | `bg-white text-blue-600 border-blue-600`             | 4.5:1以上      | 〃                       |
+| **Focus**     | `ring-yellow-400` (統一)                             | —              | Tab操作で視認可能か      |
+| **Success**   | `bg-green-50 text-green-700`                         | 4.5:1以上      | 〃                       |
+| **Error**     | `bg-red-50 text-red-700 border-red-200`              | 4.5:1以上      | 〃                       |
+| **Disabled**  | `bg-gray-100 text-gray-400` + `aria-disabled="true"` | —              | `disabled`属性が無いこと |
 
 **禁止事項**:
+
 - カスタムカラー変数（`var(--brand-primary)`等）の使用
 - `text-gray-500 bg-white`のような低コントラスト組み合わせ
 
@@ -119,28 +120,29 @@ className = "focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-of
 ```
 
 **制約**: プロジェクト全体で`ring-yellow-400`固定（他の色禁止）
-| **要素間のギャップ** | `gap-4` または `gap-6`         | 16px または 24px  |
-| **ボタン内余白**     | `px-6 py-3` または `px-8 py-4` | 横24px縦12px など |
+| **要素間のギャップ** | `gap-4` または `gap-6` | 16px または 24px |
+| **ボタン内余白** | `px-6 py-3` または `px-8 py-4` | 横24px縦12px など |
 
 ## 実装ルースペーシング＆角丸（デスクトップ基準）
 
-| 要素 | スペーシング | 角丸 | 理由 |
-|------|--------------|------|------|
-| **ボタン** | `px-8 py-3` | `rounded-md` | タップ領域44px以上確保 |
-| **カード** | `p-6` | `rounded-lg` | 視覚的グループ化 |
-| **入力** | `px-4 py-3` | `rounded-md` | フォーカス時のring表示領域 |
-| **セクション** | `py-16 px-6` | — | 情報のヒエラルキー |
-| **要素間** | `gap-6` | — | 8の倍数原則
+| 要素           | スペーシング | 角丸         | 理由                       |
+| -------------- | ------------ | ------------ | -------------------------- |
+| **ボタン**     | `px-8 py-3`  | `rounded-md` | タップ領域44px以上確保     |
+| **カード**     | `p-6`        | `rounded-lg` | 視覚的グループ化           |
+| **入力**       | `px-4 py-3`  | `rounded-md` | フォーカス時のring表示領域 |
+| **セクション** | `py-16 px-6` | —            | 情報のヒエラルキー         |
+| **要素間**     | `gap-6`      | —            | 8の倍数原則                |
+
 </button>
 
 // テキストボタン（補助的なアクション）
 <button
-  type="button"
-  className="inline-flex items-center text-base font-semibold text-blue-600 underline-offset-2 transition-colors hover:underline focus:outline-none focus:ring-4 focus:ring-yellow-400"
-  aria-label="詳細を見る"
->
-  詳細を見る
-</butパターン（コピペ可能）
+type="button"
+className="inline-flex items-center text-base font-semibold text-blue-600 underline-offset-2 transition-colors hover:underline focus:outline-none focus:ring-4 focus:ring-yellow-400"
+aria-label="詳細を見る"
+
+> 詳細を見る
+> </butパターン（コピペ可能）
 
 ### 1. ボタン（検証済み）
 
@@ -179,10 +181,11 @@ className = "focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-of
 ```
 
 **検証チェックリスト**:
+
 - [ ] `disabled`属性が無いこと
 - [ ] フォーカスリングが`ring-yellow-400`であること
 - [ ] aria-labelまたは視覚的ラベルがあること type="checkbox"
-    classNa（ARIA必須）
+      classNa（ARIA必須）
 
 ```tsx
 // ✅ テキスト入力: label/aria-describedby/エラー表示
@@ -224,6 +227,7 @@ className = "focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-of
 ```
 
 **検証チェックリスト**:
+
 - [ ] `<label htmlFor="id">`で紐付けがあること
 - [ ] エラー時に`aria-invalid="true"`が設定されること
 - [ ] エラーメッセージに`role="alert"`があること**デスクトップ優先**: PC向けのUIを基準とし、必要に応じてモバイル対応を追加
@@ -231,6 +235,7 @@ className = "focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-of
 ## クイックリファレンス
 
 ### レスポンシブ（デスクトップ→モバイル）
+
 ```tsx
 // ✅ Good: lg基準、必要な箇所のみmd/sm追加
 <div className="px-6 py-16 lg:px-8 lg:py-20">
@@ -239,17 +244,18 @@ className = "focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-of
 ```
 
 ### カスタム変数→Tailwindクラス変換表
+
 ```tsx
 // ❌ Before (禁止)
-className="bg-[var(--brand-primary)] hover:bg-[var(--brand-primary-hover)]"
+className = "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary-hover)]";
 
 // ✅ After (推奨)
-className="bg-blue-600 hover:bg-blue-700"
+className = "bg-blue-600 hover:bg-blue-700";
 ```
 
-| 旧カスタム変数 | 新Tailwindクラス | 用途 |
-|----------------|------------------|------|
-| `var(--brand-primary)` | `blue-600` | Primary |
-| `var(--brand-light)` | `blue-50` | 背景 |
-| `var(--accent-yellow)` | `yellow-400` | Focus |
-| `var(--foreground)` | `gray-900` | テキスト |
+| 旧カスタム変数         | 新Tailwindクラス | 用途     |
+| ---------------------- | ---------------- | -------- |
+| `var(--brand-primary)` | `blue-600`       | Primary  |
+| `var(--brand-light)`   | `blue-50`        | 背景     |
+| `var(--accent-yellow)` | `yellow-400`     | Focus    |
+| `var(--foreground)`    | `gray-900`       | テキスト |

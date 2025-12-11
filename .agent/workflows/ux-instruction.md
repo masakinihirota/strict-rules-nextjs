@@ -47,20 +47,21 @@ Output: Before/After KPI比較レポート、統計的有意性検証
 
 **対象**: 新規実装、主要機能、全画面
 
-| # | 原則 | 実装要件 | 根拠データ | 検証方法 |
-|---|------|----------|----------|----------|
-| **UX-1** | **ドハティ闾値** | Supabase API応答0.4秒以内<br>超える場合スケルトン表示 | 0.4秒を超えると離脱率15%増加 | Lighthouse Performance 90+ |
-| **UX-2** | **認知負荷** | フォーム項目≤7個/画面<br>超える場合はステップ分割 | ミラーのマジカルナンバー7±2 | 項目数カウント |
-| **UX-3** | **親近性バイアス** | サインインボタンは右上<br>ロゴは左上（慣習の配置） | 慣習的UIで学習コスト削減 | ユーザビリティテスト |
-| **UX-5** | **美的ユーザビリティ** | 高品質ビジュアル<br>DADSデザインシステム準拠 | 美しいUIは軽微な不具合を許容 | デザインシステムスコア80+ |
-| **UX-6** | **ツァイガルニク効果** | オンボーディングチェックリスト<br>一部自動完了 | Blinkistで課金率27%向上 | 完了率計測 |
+| #        | 原則                   | 実装要件                                              | 根拠データ                   | 検証方法                   |
+| -------- | ---------------------- | ----------------------------------------------------- | ---------------------------- | -------------------------- |
+| **UX-1** | **ドハティ闾値**       | Supabase API応答0.4秒以内<br>超える場合スケルトン表示 | 0.4秒を超えると離脱率15%増加 | Lighthouse Performance 90+ |
+| **UX-2** | **認知負荷**           | フォーム項目≤7個/画面<br>超える場合はステップ分割     | ミラーのマジカルナンバー7±2  | 項目数カウント             |
+| **UX-3** | **親近性バイアス**     | サインインボタンは右上<br>ロゴは左上（慣習の配置）    | 慣習的UIで学習コスト削減     | ユーザビリティテスト       |
+| **UX-5** | **美的ユーザビリティ** | 高品質ビジュアル<br>DADSデザインシステム準拠          | 美しいUIは軽微な不具合を許容 | デザインシステムスコア80+  |
+| **UX-6** | **ツァイガルニク効果** | オンボーディングチェックリスト<br>一部自動完了        | Blinkistで課金率27%向上      | 完了率計測                 |
 
 **実装例：ドハティ闾値（UX-1）**:
+
 ```tsx
 // ✅ 0.4秒以内の応答がAIかはスケルトン表示
 export default function ProfileList() {
   const { data: profiles, isLoading } = useQuery({
-    queryKey: ['profiles'],
+    queryKey: ["profiles"],
     queryFn: fetchProfiles,
     staleTime: 30000, // 30秒キャッシュ
   });
@@ -82,7 +83,9 @@ export default function ProfileList() {
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {profiles?.map((profile) => <ProfileCard key={profile.id} profile={profile} />)}
+      {profiles?.map((profile) => (
+        <ProfileCard key={profile.id} profile={profile} />
+      ))}
     </div>
   );
 }
@@ -94,20 +97,21 @@ export default function ProfileList() {
 
 **対象**: ダッシュボード、課金フロー、オンボーディング
 
-| # | 原則 | 実装要件 | 根拠データ |
-|---|------|----------|----------|
-| UX-7 | 目標勾配効果 | プログレスバーで進捗率表示 | 目標に近づくと努力が加速 |
-| UX-8 | ゲーミフィケーション | XP・ストリークシステム | 達成感と競争心刺激 |
-| UX-9 | 変動型報酬 | フィード、通知の予測不能性 | ドーパミン放出、習慣化 |
-| UX-10 | 授かり効果 | 登録直後にパーソナライズ提供 | 所有感で価値過大評価 |
-| UX-11 | おとり効果 | 3プラン表示（中間がデコイ） | 特定プランを魅力的に見せる |
-| UX-12 | アンカー効果 | 割引前価格を先に表示 | 参照点として利用 |
-| UX-13 | デフォルト効果 | 推奨プランをデフォルト選択 | 変更の手間回避 |
-| UX-14 | 希少性効果 | 期間限定オファー表示 | 損失回避で購入意欲向上 |
-| UX-15 | 好奇心ギャップ | 情報の欠如で課金誘導 | ギャップを埋める行動促進 |
+| #     | 原則                 | 実装要件                     | 根拠データ                  |
+| ----- | -------------------- | ---------------------------- | --------------------------- |
+| UX-7  | 目標勾配効果         | プログレスバーで進捗率表示   | 目標に近づくと努力が加速    |
+| UX-8  | ゲーミフィケーション | XP・ストリークシステム       | 達成感と競争心刺激          |
+| UX-9  | 変動型報酬           | フィード、通知の予測不能性   | ドーパミン放出、習慣化      |
+| UX-10 | 授かり効果           | 登録直後にパーソナライズ提供 | 所有感で価値過大評価        |
+| UX-11 | おとり効果           | 3プラン表示（中間がデコイ）  | 特定プランを魅力的に見せる  |
+| UX-12 | アンカー効果         | 割引前価格を先に表示         | 参照点として利用            |
+| UX-13 | デフォルト効果       | 推奨プランをデフォルト選択   | 変更の手間回避              |
+| UX-14 | 希少性効果           | 期間限定オファー表示         | 損失回避で購入意欲向上      |
+| UX-15 | 好奇心ギャップ       | 情報の欠如で課金誘導         | ギャップを埋める行動促進    |
 | UX-16 | ピーク・エンドの法則 | タスク完了時にアニメーション | 最高/終わりの瞬間が評価決定 |
 
 **実装例：おとり効果（UX-11）**:
+
 ```tsx
 // ✅ 3プラン表示でStandardを魅力的に見せる
 export default function PricingPage() {
@@ -216,12 +220,12 @@ UI/UX設計、コンポーネント実装の要件定義、およびグロース
 
 開発プロセスにおける認知バイアスを回避し、客観的なデータに基づいた改善を徹底すること。
 
-| UX原則                               | Next.js/Supabaseへの適用指示（実装要件）                                                                                                                                              | 根拠となるノウハウ |
-| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :----------------- |
-| **確証バイアス (Confirmation Bias)** | デザイナーや開発者の**既存の仮説に矛盾するSupabaseのデータ分析結果**やユーザーフィードバックが出た場合、これを無視せず、意識的に検証し、客観的な意思決定を行うこと,                   | 意思決定の質向上                  |
-| **共感ギャップ (Empathy Gap)**       | 開発者やデザイナー自身の知識や経験のみに頼らず、**定量的（Supabaseデータ）および定性的（ユーザーヒアリング）なデータ**を収集・分析し、ユーザーの実際の感情やニーズを深く理解すること, | ユーザー中心設計の実現                  |
-| **観察効果 (Hawthorne Effect)**      | ユーザーインタビューやユーザビリティテストを実施する際、ユーザーが**観察されていることによる行動変化**（素直なフィードバックの困難さ）を認識し、結果の解釈に反映させること,           | テスト精度向上                  |
-| **調査バイアス (Survey Bias)**       | ユーザーからのフィードバックやNPSアンケートを収集する際、質問の設計やサンプリング方法が**母集団の特性を正確に反映しているか**を厳密に検証し、偏りのないデータ収集を徹底すること,      | データ品質確保                  |
+| UX原則                               | Next.js/Supabaseへの適用指示（実装要件）                                                                                                                                              | 根拠となるノウハウ     |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------- |
+| **確証バイアス (Confirmation Bias)** | デザイナーや開発者の**既存の仮説に矛盾するSupabaseのデータ分析結果**やユーザーフィードバックが出た場合、これを無視せず、意識的に検証し、客観的な意思決定を行うこと,                   | 意思決定の質向上       |
+| **共感ギャップ (Empathy Gap)**       | 開発者やデザイナー自身の知識や経験のみに頼らず、**定量的（Supabaseデータ）および定性的（ユーザーヒアリング）なデータ**を収集・分析し、ユーザーの実際の感情やニーズを深く理解すること, | ユーザー中心設計の実現 |
+| **観察効果 (Hawthorne Effect)**      | ユーザーインタビューやユーザビリティテストを実施する際、ユーザーが**観察されていることによる行動変化**（素直なフィードバックの困難さ）を認識し、結果の解釈に反映させること,           | テスト精度向上         |
+| **調査バイアス (Survey Bias)**       | ユーザーからのフィードバックやNPSアンケートを収集する際、質問の設計やサンプリング方法が**母集団の特性を正確に反映しているか**を厳密に検証し、偏りのないデータ収集を徹底すること,      | データ品質確保         |
 
 ---
 
@@ -232,32 +236,30 @@ UI/UX設計、コンポーネント実装の要件定義、およびグロース
 **適用原則**: UX-2認知負荷、UX-6ツァイガルニク効果、UX-7目標勾配効果
 
 **実装例**:
+
 ```tsx
 // ✅ チェックリスト式オンボーディング（Blinkistモデル）
 export default function OnboardingChecklist() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: 'プロフィール設定', completed: true },  // 自動完了
-    { id: 2, title: 'アバター追加', completed: false },
-    { id: 3, title: '最初の投稿', completed: false },
+    { id: 1, title: "プロフィール設定", completed: true }, // 自動完了
+    { id: 2, title: "アバター追加", completed: false },
+    { id: 3, title: "最初の投稿", completed: false },
   ]);
 
-  const progress = (tasks.filter(t => t.completed).length / tasks.length) * 100;
+  const progress = (tasks.filter((t) => t.completed).length / tasks.length) * 100;
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>セットアップを完了しましょう</CardTitle>
-        <Progress value={progress} className="mt-2" />  {/* 目標勾配効果 */}
+        <Progress value={progress} className="mt-2" /> {/* 目標勾配効果 */}
         <p className="text-sm text-muted-foreground">{Math.round(progress)}% 完了</p>
       </CardHeader>
       <CardContent className="space-y-2">
-        {tasks.map(task => (
+        {tasks.map((task) => (
           <div key={task.id} className="flex items-center gap-2">
-            <Checkbox
-              checked={task.completed}
-              onCheckedChange={() => toggleTask(task.id)}
-            />
-            <span className={task.completed ? 'line-through text-muted-foreground' : ''}>
+            <Checkbox checked={task.completed} onCheckedChange={() => toggleTask(task.id)} />
+            <span className={task.completed ? "line-through text-muted-foreground" : ""}>
               {task.title}
             </span>
           </div>
@@ -277,6 +279,7 @@ export default function OnboardingChecklist() {
 **適用原則**: UX-11おとり効果、UX-12アンカー効果、UX-13デフォルト効果、UX-14希少性効果
 
 **実装例**:
+
 ```tsx
 // ✅ 4つの心理学原則を組み合わせた料金ページ
 export default function PricingWithPsychology() {
@@ -334,13 +337,14 @@ export default function PricingWithPsychology() {
 **適用原則**: UX-8ゲーミフィケーション、UX-9変動型報酬、UX-16ピーク・エンドの法則
 
 **実装例**:
+
 ```tsx
 // ✅ XPシステムとストリークで習慣化
 export default function DashboardWithGamification() {
   const [user, setUser] = useState({
     xp: 1250,
     level: 5,
-    streak: 7,  // 連続ログイン日数
+    streak: 7, // 連続ログイン日数
   });
 
   const nextLevelXP = user.level * 300;
@@ -354,7 +358,9 @@ export default function DashboardWithGamification() {
           <div className="flex items-center justify-between">
             <div>
               <CardTitle>Level {user.level}</CardTitle>
-              <CardDescription>{user.xp} / {nextLevelXP} XP</CardDescription>
+              <CardDescription>
+                {user.xp} / {nextLevelXP} XP
+              </CardDescription>
             </div>
             <Badge variant="secondary">🔥 {user.streak}日連続</Badge>
           </div>

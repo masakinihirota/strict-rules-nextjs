@@ -1,4 +1,3 @@
-
 Antigravityを使う前に: Next.js用に人間には厳しいルールを適用したサンプル #Gemini - Qiita
 
 https://qiita.com/masakinihirota/items/dbbd8f897114a422d83a
@@ -8,10 +7,12 @@ https://qiita.com/masakinihirota/items/dbbd8f897114a422d83a
 ---
 
 ## 📌 Barrel Export（バレルエクスポート）とは？
+
 Barrel Export は、ディレクトリの入口（通常 `index.ts`）にそのディレクトリ配下の複数ファイルからの再エクスポート（re-export）をまとめたファイルを置く手法です。
 パスを短く・分かりやすくすることで、利用側のインポートをシンプルにする目的で使われます。
 
 例:
+
 - 個別インポート（深いパス）:
   ```ts
   import { ProfileList } from "@/components/profile-list/profile-list";
@@ -24,6 +25,7 @@ Barrel Export は、ディレクトリの入口（通常 `index.ts`）にその�
 ---
 
 ## ✅ 利点
+
 - インポートが短く、見通しが良くなる（可読性向上）
 - モジュールの公開 API を一箇所で管理できる（公開/非公開の制御が容易）
 - サブパスの深い import を防げる（プロジェクトの規約に適合）
@@ -34,6 +36,7 @@ Barrel Export は、ディレクトリの入口（通常 `index.ts`）にその�
 ## 🔧 典型的な使い方（TypeScript 例）
 
 ファイル構成:
+
 ```
 components/
 └─ profile-list/
@@ -43,6 +46,7 @@ components/
 ```
 
 `profile-list.tsx`:
+
 ```ts
 // src/components/profile-list/profile-list.tsx
 export const ProfileList = () => {
@@ -53,6 +57,7 @@ export type ProfileListProps = { /* ... */ };
 ```
 
 `index.ts`（バレル/再エクスポート）:
+
 ```ts
 // src/components/profile-list/index.ts
 export { ProfileList } from "./profile-list";
@@ -61,6 +66,7 @@ export { someLogicFn } from "./profile-list.logic";
 ```
 
 利用側:
+
 ```ts
 import { ProfileList, someLogicFn } from "@/components/profile-list";
 import type { ProfileListProps } from "@/components/profile-list";
@@ -69,6 +75,7 @@ import type { ProfileListProps } from "@/components/profile-list";
 ---
 
 ## 📋 このプロジェクトにおけるルールとの関係
+
 このリポジトリの `​.copilot-codeGeneration-instructions.md` の方針にあるルールに沿って、次の点を守ることが推奨されます。
 
 - I-4: 各ディレクトリに必ず `index.ts` を設置し、そのレイヤーで公開してよいものだけを export（バレルを必須化）。
@@ -77,17 +84,14 @@ import type { ProfileListProps } from "@/components/profile-list";
 - I-3: サブパスインポート禁止 → バレルを使って `@/components/...` のような短いルートでインポートするのが推奨。
 - 明示的なエクスポートを推奨（`export { X }`）、ワイルドカード（`export * from ...`）は安易に使わない方が安全。
 
-
-
 ---
 
 ## 📝 Barrel Export まとめ（簡潔に）
+
 - Barrel Export はフォルダ単位での `index.ts` による再エクスポートをまとめる仕組みです。
 - インポートが短くなり、APIの公開管理がしやすくなります。
 - このプロジェクトでは `index.ts` を必須にして、再エクスポートのみ・名前付きエクスポートのみ使う方針になっています。
 - 注意点として循環依存・ワイルドカード再エクスポート・副作用の混入に気をつけて実装してください。
-
-
 
 ---
 
@@ -132,13 +136,10 @@ import type { ProfileListProps } from "@/components/profile-list";
 
 AIへプロンプト投げる時、少しだけこれを意識すると劇的に結果が変わります。
 
-
 ### 参考
 
 XユーザーのJさん: 「海外Redditで、LLMへ渡すプロンプト設計に関する超有益ポスト。 ポスト主はプロンプト分析に1000時間以上費やし、成功するプロンプトには6つの共通パターンがあると結論。 ✅ K: シンプルに 悪い：「Redisについて何か書いて」 良い：「Redisキャッシングの技術チュートリアルを書いて」 →」 / X
 https://x.com/j_kun_ml/status/1998697951485403647
-
-
 
 ---
 
