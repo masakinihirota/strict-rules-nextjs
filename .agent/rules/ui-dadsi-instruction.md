@@ -247,7 +247,7 @@ aria-label="詳細を見る"
 
 ```tsx
 // ❌ Before (禁止)
-className = "bg-[var(--brand-primary)] hover:bg-[var(--brand-primary-hover)]";
+className = "bg-(--brand-primary) hover:bg-(--brand-primary-hover)";
 
 // ✅ After (推奨)
 className = "bg-blue-600 hover:bg-blue-700";
