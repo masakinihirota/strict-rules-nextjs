@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
+    "fix": "eslint . --fix && prettier --write .",
     "test": "vitest --run",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage"
